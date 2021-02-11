@@ -1,8 +1,8 @@
 package com.sayantanbanerjee.tmdbclient.data.api
 
-import com.sayantanbanerjee.tmdbclient.data.ArtistList
-import com.sayantanbanerjee.tmdbclient.data.MovieList
-import com.sayantanbanerjee.tmdbclient.data.TvShowList
+import com.sayantanbanerjee.tmdbclient.data.model.Artist.ArtistList
+import com.sayantanbanerjee.tmdbclient.data.model.Movie.MovieList
+import com.sayantanbanerjee.tmdbclient.data.model.TvShow.TvShowList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

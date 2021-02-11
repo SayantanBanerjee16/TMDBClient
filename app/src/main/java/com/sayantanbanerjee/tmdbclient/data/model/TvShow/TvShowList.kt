@@ -1,4 +1,4 @@
-package com.sayantanbanerjee.tmdbclient.data
+package com.sayantanbanerjee.tmdbclient.data.model.TvShow
 
 import com.google.gson.annotations.SerializedName
 
