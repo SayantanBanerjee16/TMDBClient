@@ -5,6 +5,8 @@ import com.sayantanbanerjee.tmdbclient.data.model.Movie.MovieList
 import com.sayantanbanerjee.tmdbclient.data.repository.movie.DataSource.MovieRemoteDataSource
 import retrofit2.Response
 
+// Implementation of the Movie Remote Data Source Interface.
+// That is, it makes a retrofit call to the server which returns movie list as response.
 class MovieRemoteDataSourceImpl(
     private val tmdbService: TMDBService,
     private val apiKey: String
