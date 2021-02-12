@@ -73,7 +73,7 @@ class MovieRepositoryImpl(
         try {
             movieList = movieCacheDataSource.getMoviesFromCache()
         }catch (exp : Exception){
-            Log.i("GET MOVIES FROM DB", exp.toString())
+            Log.i("GET MOVIES FROM CACHE", exp.toString())
         }
         return if(movieList.size >= 0){
             movieList

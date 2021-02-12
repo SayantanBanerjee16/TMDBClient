@@ -8,11 +8,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 // Implementation of the Movie Local Data Source Interface.
-// It takes MovieDao as a parameter, which allows us to interact with the local Movie database.
-// THe methods includes :-
-//      Saving movies from the database.
+// It takes MovieDao as a parameter, which allows us to interact with the local Movie entity.
+// The methods includes :-
+//      Saving movies into the entity.
 //      Getting the movies from the database.
-//      Clearing all the movies in the database.
+//      Clearing all the movies in the entity.
 class MovieLocalDataSourceImpl(private val movieDao: MovieDao) : MovieLocalDataSource {
     override suspend fun getMoviesFromDB(): List<Movie> {
         return movieDao.getAllMovies()
