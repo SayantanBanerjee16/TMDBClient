@@ -8,6 +8,6 @@ import com.sayantanbanerjee.tmdbclient.domain.repository.MovieRepository
 // So that there is no direct dependency between Repository and View Model.
 
 // This use case updates the list of Movies in the database.
-class UpdateMoviesUseClass(private val movieRepository: MovieRepository) {
+class UpdateMoviesUseCase(private val movieRepository: MovieRepository) {
     suspend fun execute() : List<Movie>? = movieRepository.updateMovies()
 }

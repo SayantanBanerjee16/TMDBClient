@@ -8,6 +8,6 @@ import com.sayantanbanerjee.tmdbclient.domain.repository.MovieRepository
 // So that there is no direct dependency between Repository and View Model.
 
 // This use case return the list of Movies from the database.
-class GetMoviesUseClass(private val movieRepository: MovieRepository) {
+class GetMoviesUseCase(private val movieRepository: MovieRepository) {
     suspend fun execute(): List<Movie>? = movieRepository.getMovies()
 }
