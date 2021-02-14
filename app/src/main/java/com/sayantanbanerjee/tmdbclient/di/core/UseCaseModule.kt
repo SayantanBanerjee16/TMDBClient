@@ -1,4 +1,4 @@
-package com.sayantanbanerjee.tmdbclient.di
+package com.sayantanbanerjee.tmdbclient.di.core
 
 import com.sayantanbanerjee.tmdbclient.domain.repository.ArtistRepository
 import com.sayantanbanerjee.tmdbclient.domain.repository.MovieRepository

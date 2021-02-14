@@ -1,4 +1,4 @@
-package com.sayantanbanerjee.tmdbclient.di
+package com.sayantanbanerjee.tmdbclient.di.core
 
 import dagger.Component
 import javax.inject.Singleton

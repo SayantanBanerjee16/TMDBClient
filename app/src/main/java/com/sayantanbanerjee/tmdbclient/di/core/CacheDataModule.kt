@@ -1,4 +1,4 @@
-package com.sayantanbanerjee.tmdbclient.di
+package com.sayantanbanerjee.tmdbclient.di.core
 
 import com.sayantanbanerjee.tmdbclient.data.repository.artist.DataSource.ArtistCacheDataSource
 import com.sayantanbanerjee.tmdbclient.data.repository.artist.DataSourceImpl.ArtistCacheDataSourceImpl

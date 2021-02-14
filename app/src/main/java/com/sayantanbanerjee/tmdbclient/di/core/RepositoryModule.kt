@@ -1,4 +1,4 @@
-package com.sayantanbanerjee.tmdbclient.di
+package com.sayantanbanerjee.tmdbclient.di.core
 
 import com.sayantanbanerjee.tmdbclient.data.repository.artist.ArtistRepositoryImpl
 import com.sayantanbanerjee.tmdbclient.data.repository.artist.DataSource.ArtistCacheDataSource
@@ -15,9 +15,11 @@ import com.sayantanbanerjee.tmdbclient.data.repository.tvshow.TvShowRepositoryIm
 import com.sayantanbanerjee.tmdbclient.domain.repository.ArtistRepository
 import com.sayantanbanerjee.tmdbclient.domain.repository.MovieRepository
 import com.sayantanbanerjee.tmdbclient.domain.repository.TvShowRepository
+import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+@Module
 class RepositoryModule {
 
     @Provides
@@ -61,5 +63,4 @@ class RepositoryModule {
             tvShowCacheDataSource
         )
     }
-
 }
