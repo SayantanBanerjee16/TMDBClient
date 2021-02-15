@@ -60,7 +60,7 @@ class TvShowRepositoryImpl(
         }catch (exp : Exception){
             Log.i("GET TV SHOW FROM DB", exp.toString())
         }
-        return if(tvShowList.size >= 0){
+        return if(tvShowList.isNotEmpty()){
             tvShowList
         }else{
             tvShowList = getTvShowFromAPI()
@@ -76,7 +76,7 @@ class TvShowRepositoryImpl(
         }catch (exp : Exception){
             Log.i("GET TV SHOW FROM CACHE", exp.toString())
         }
-        return if(tvShowList.size >= 0){
+        return if(tvShowList.isNotEmpty()){
             tvShowList
         }else{
             tvShowList = getTvShowFromDB()

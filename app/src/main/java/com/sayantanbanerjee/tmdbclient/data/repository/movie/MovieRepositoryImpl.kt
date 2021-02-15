@@ -38,46 +38,46 @@ class MovieRepositoryImpl(
         return newListOfMovie
     }
 
-    suspend fun getMoviesFromAPI() : List<Movie>{
-        lateinit var movieList : List<Movie>
+    suspend fun getMoviesFromAPI(): List<Movie> {
+        lateinit var movieList: List<Movie>
         try {
             val response = movieRemoteDataSource.getMovies()
             val responseBody = response.body()
-            if(responseBody != null){
+            if (responseBody != null) {
                 movieList = responseBody.movies
             }
-        }catch (exp : Exception){
+        } catch (exp: Exception) {
             Log.i("GET MOVIES FROM API", exp.toString())
         }
         return movieList
     }
 
-    suspend fun getMoviesFromDB() : List<Movie>{
-        lateinit var movieList : List<Movie>
+    suspend fun getMoviesFromDB(): List<Movie> {
+        lateinit var movieList: List<Movie>
         try {
             movieList = movieLocalDataSource.getMoviesFromDB()
-        }catch (exp : Exception){
+        } catch (exp: Exception) {
             Log.i("GET MOVIES FROM DB", exp.toString())
         }
-        return if(movieList.size >= 0){
+        return if (movieList.isNotEmpty()) {
             movieList
-        }else{
+        } else {
             movieList = getMoviesFromAPI()
             movieLocalDataSource.saveMoviesToDB(movieList)
             movieList
         }
     }
 
-    suspend fun getMoviesFromCache() : List<Movie>{
-        lateinit var movieList : List<Movie>
+    suspend fun getMoviesFromCache(): List<Movie> {
+        lateinit var movieList: List<Movie>
         try {
             movieList = movieCacheDataSource.getMoviesFromCache()
-        }catch (exp : Exception){
+        } catch (exp: Exception) {
             Log.i("GET MOVIES FROM CACHE", exp.toString())
         }
-        return if(movieList.size >= 0){
+        return if (movieList.isNotEmpty()) {
             movieList
-        }else{
+        } else {
             movieList = getMoviesFromDB()
             movieCacheDataSource.saveMoviesToCache(movieList)
             movieList

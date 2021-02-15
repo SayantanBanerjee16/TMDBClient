@@ -59,7 +59,7 @@ class ArtistRepositoryImpl(
         }catch (exp : Exception){
             Log.i("GET ARTIST FROM DB", exp.toString())
         }
-        return if(artistList.size >= 0){
+        return if(artistList.isNotEmpty()){
             artistList
         }else{
             artistList = getArtistsFromAPI()
@@ -75,7 +75,7 @@ class ArtistRepositoryImpl(
         }catch (exp : Exception){
             Log.i("GET ARTIST FROM CACHE", exp.toString())
         }
-        return if(artistList.size >= 0){
+        return if(artistList.isNotEmpty()){
             artistList
         }else{
             artistList = getArtistFromDB()
