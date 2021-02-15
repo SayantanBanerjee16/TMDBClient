@@ -3,7 +3,6 @@ package com.sayantanbanerjee.tmdbclient.presentation.movie
 import androidx.appcompat.app.AppCompatActivity
 import com.sayantanbanerjee.tmdbclient.R
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
