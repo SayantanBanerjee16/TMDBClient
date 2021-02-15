@@ -9,6 +9,7 @@ import com.sayantanbanerjee.tmdbclient.R
 import com.sayantanbanerjee.tmdbclient.data.model.Movie.Movie
 import com.sayantanbanerjee.tmdbclient.databinding.ListItemBinding
 
+// Adapter which displays the Movie list.
 class MovieAdapter : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     private val movieList = ArrayList<Movie>()

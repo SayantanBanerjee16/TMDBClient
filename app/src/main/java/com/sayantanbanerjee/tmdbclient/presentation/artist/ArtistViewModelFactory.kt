@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sayantanbanerjee.tmdbclient.domain.usecase.GetArtistUseCase
 import com.sayantanbanerjee.tmdbclient.domain.usecase.UpdateArtistUseCase
 
+// Artist View Model Factory Class.
 class ArtistViewModelFactory(
     private val getArtistUseCase: GetArtistUseCase,
     private val updateArtistUseCase: UpdateArtistUseCase

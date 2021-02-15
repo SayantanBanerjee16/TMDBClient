@@ -21,22 +21,29 @@ class MovieActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: MovieViewModelFactory
+
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var binding: ActivityMovieBinding
     private lateinit var adapter: MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Bind the activity to use Data Binding.
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie)
+
+        // Inject the Dagger sub-component.
         (application as Injector).createMovieSubComponent()
             .inject(this)
 
+        // Initialize the view model.
         movieViewModel = ViewModelProvider(this, factory)
             .get(MovieViewModel::class.java)
 
         initRecyclerView()
     }
 
+    // Initialize the recycler view.
     private fun initRecyclerView() {
         binding.movieRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MovieAdapter()
@@ -44,6 +51,8 @@ class MovieActivity : AppCompatActivity() {
         displayPopularMovies()
     }
 
+    // Call the view model which returns the movie list as a live data.
+    // And then pass the list to the adapter.
     private fun displayPopularMovies() {
         binding.movieProgressBar.visibility = View.VISIBLE
         val responseLiveData = movieViewModel.getMovies()
@@ -58,12 +67,14 @@ class MovieActivity : AppCompatActivity() {
         })
     }
 
+    // Setting the Menu item which sets the Update Movie option.
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.update, menu)
         return true
     }
 
+    // Action to be performed when the updated button is clicked.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_update -> {
@@ -74,6 +85,8 @@ class MovieActivity : AppCompatActivity() {
         }
     }
 
+    // Call the view model which returns the updated movies list as a live data.
+    // And then pass the updated list to the adapter.
     private fun updatePopularMovies() {
         binding.movieProgressBar.visibility = View.VISIBLE
         val responseLiveData = movieViewModel.updateMovies()

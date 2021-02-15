@@ -9,6 +9,7 @@ import com.sayantanbanerjee.tmdbclient.R
 import com.sayantanbanerjee.tmdbclient.data.model.TvShow.TvShow
 import com.sayantanbanerjee.tmdbclient.databinding.ListItemBinding
 
+// Adapter which displays the TvShow list.
 class TvShowAdapter : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     private val tvshowList = ArrayList<TvShow>()

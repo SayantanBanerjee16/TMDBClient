@@ -10,6 +10,7 @@ import com.sayantanbanerjee.tmdbclient.R
 import com.sayantanbanerjee.tmdbclient.data.model.Artist.Artist
 import com.sayantanbanerjee.tmdbclient.databinding.ListItemBinding
 
+// Adapter which displays the Artist list.
 class ArtistAdapter : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     private val artistList = ArrayList<Artist>()
@@ -53,5 +54,4 @@ class RecyclerViewHolder(private val binding: ListItemBinding) :
             .load(posterURL)
             .into(binding.imageView)
     }
-
 }
