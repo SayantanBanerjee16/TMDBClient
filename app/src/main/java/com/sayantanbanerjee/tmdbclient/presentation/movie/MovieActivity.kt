@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sayantanbanerjee.tmdbclient.R
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -45,6 +48,36 @@ class MovieActivity : AppCompatActivity() {
     private fun displayPopularMovies() {
         binding.movieProgressBar.visibility = View.VISIBLE
         val responseLiveData = movieViewModel.getMovies()
+        responseLiveData.observe(this, Observer {
+            binding.movieProgressBar.visibility = View.GONE
+            if (it != null) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            } else {
+                Toast.makeText(applicationContext, "No movies fetched!", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.update, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_update -> {
+                updatePopularMovies()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun updatePopularMovies() {
+        binding.movieProgressBar.visibility = View.VISIBLE
+        val responseLiveData = movieViewModel.updateMovies()
         responseLiveData.observe(this, Observer {
             binding.movieProgressBar.visibility = View.GONE
             if (it != null) {
