@@ -84,7 +84,7 @@ class ArtistActivity : AppCompatActivity() {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
             } else {
-                Toast.makeText(applicationContext, "No movies fetched!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "No artists fetched!", Toast.LENGTH_SHORT).show()
             }
         })
     }
