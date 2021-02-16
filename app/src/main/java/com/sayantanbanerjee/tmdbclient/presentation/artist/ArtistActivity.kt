@@ -1,5 +1,7 @@
 package com.sayantanbanerjee.tmdbclient.presentation.artist
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -25,6 +27,7 @@ class ArtistActivity : AppCompatActivity() {
     private lateinit var artistViewModel: ArtistViewModel
     private lateinit var adapter: ArtistAdapter
     private lateinit var binding: ActivityArtistBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,13 @@ class ArtistActivity : AppCompatActivity() {
         artistViewModel = ViewModelProvider(this, factory)
             .get(ArtistViewModel::class.java)
 
+        sharedPreferences = applicationContext.getSharedPreferences(
+            "com.sayantanbanerjee.tmdbclient",
+            Context.MODE_PRIVATE
+        )
+
         initRecyclerView()
+        getArtistData()
     }
 
     // Initialize the recycler view.
@@ -48,10 +57,23 @@ class ArtistActivity : AppCompatActivity() {
         binding.artistRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ArtistAdapter()
         binding.artistRecyclerView.adapter = adapter
-        if (CheckNetworkConnection.checkNetwork(this)) {
-            displayPopularArtist()
+    }
+
+    // Check if Artist data pre-fetched or not.
+    // If pre-fetched already, call the list from the repository, here, Database/Cache calling.
+    // If not, first check for the network connection.
+    // If valid connectivity found, call the list from the repository, here, API calling.
+    private fun getArtistData() {
+        if (sharedPreferences.getBoolean("first_time_artist_data_fetch", true)) {
+            if (CheckNetworkConnection.checkNetwork(this)) {
+                displayPopularArtist()
+                sharedPreferences.edit().putBoolean("first_time_artist_data_fetch", false).apply()
+            } else {
+                Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                    .show()
+            }
         } else {
-            Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT).show()
+            displayPopularArtist()
         }
     }
 
@@ -85,6 +107,8 @@ class ArtistActivity : AppCompatActivity() {
             R.id.action_update -> {
                 if (CheckNetworkConnection.checkNetwork(this)) {
                     updatePopularArtist()
+                    sharedPreferences.edit().putBoolean("first_time_artist_data_fetch", false)
+                        .apply()
                 } else {
                     Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
                         .show()

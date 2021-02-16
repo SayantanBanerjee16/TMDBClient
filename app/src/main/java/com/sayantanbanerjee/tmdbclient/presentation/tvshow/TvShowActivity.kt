@@ -1,5 +1,7 @@
 package com.sayantanbanerjee.tmdbclient.presentation.tvshow
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -26,6 +28,7 @@ class TvShowActivity : AppCompatActivity() {
     private lateinit var tvshowViewModel: TvShowViewModel
     private lateinit var adapter: TvShowAdapter
     private lateinit var binding: ActivityTvShowBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,13 @@ class TvShowActivity : AppCompatActivity() {
         tvshowViewModel = ViewModelProvider(this, factory)
             .get(TvShowViewModel::class.java)
 
+        sharedPreferences = applicationContext.getSharedPreferences(
+            "com.sayantanbanerjee.tmdbclient",
+            Context.MODE_PRIVATE
+        )
+
         initRecyclerView()
+        getTvShowData()
     }
 
     // Initialize the recycler view.
@@ -49,11 +58,23 @@ class TvShowActivity : AppCompatActivity() {
         binding.tvshowRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = TvShowAdapter()
         binding.tvshowRecyclerView.adapter = adapter
-        if (CheckNetworkConnection.checkNetwork(this)) {
-            displayPopularTvShows()
+    }
+
+    // Check if TvShow data pre-fetched or not.
+    // If pre-fetched already, call the list from the repository, here, Database/Cache calling.
+    // If not, first check for the network connection.
+    // If valid connectivity found, call the list from the repository, here, API calling.
+    private fun getTvShowData(){
+        if (sharedPreferences.getBoolean("first_time_data_tv_fetch", true)) {
+            if (CheckNetworkConnection.checkNetwork(this)) {
+                displayPopularTvShows()
+                sharedPreferences.edit().putBoolean("first_time_data_tv_fetch", false).apply()
+            } else {
+                Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                    .show()
+            }
         } else {
-            Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
-                .show()
+            displayPopularTvShows()
         }
     }
 
@@ -87,6 +108,7 @@ class TvShowActivity : AppCompatActivity() {
             R.id.action_update -> {
                 if (CheckNetworkConnection.checkNetwork(this)) {
                     updatePopularTvShows()
+                    sharedPreferences.edit().putBoolean("first_time_data_tv_fetch", false).apply()
                 } else {
                     Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
                         .show()

@@ -1,5 +1,7 @@
 package com.sayantanbanerjee.tmdbclient.presentation.movie
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import com.sayantanbanerjee.tmdbclient.R
 import android.os.Bundle
@@ -26,6 +28,7 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var binding: ActivityMovieBinding
     private lateinit var adapter: MovieAdapter
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,13 @@ class MovieActivity : AppCompatActivity() {
         movieViewModel = ViewModelProvider(this, factory)
             .get(MovieViewModel::class.java)
 
+        sharedPreferences = applicationContext.getSharedPreferences(
+            "com.sayantanbanerjee.tmdbclient",
+            Context.MODE_PRIVATE
+        )
+
         initRecyclerView()
+        getMovieData()
     }
 
     // Initialize the recycler view.
@@ -49,11 +58,24 @@ class MovieActivity : AppCompatActivity() {
         binding.movieRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MovieAdapter()
         binding.movieRecyclerView.adapter = adapter
-        if (CheckNetworkConnection.checkNetwork(this)) {
-            displayPopularMovies()
+    }
+
+    // Check if Movie data pre-fetched or not.
+    // If pre-fetched already, call the list from the repository, here, Database/Cache calling.
+    // If not, first check for the network connection.
+    // If valid connectivity found, call the list from the repository, here, API calling.
+    private fun getMovieData(){
+        if (sharedPreferences.getBoolean("first_time_movie_data_fetch", true)) {
+            if (CheckNetworkConnection.checkNetwork(this)) {
+                displayPopularMovies()
+                sharedPreferences.edit().putBoolean("first_time_movie_data_fetch", false).apply()
+            } else {
+                Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                    .show()
+            }
         } else {
-            Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
-                .show()
+            // If data pre-fetched, fetch the list from the database/cache.
+            displayPopularMovies()
         }
     }
 
@@ -86,6 +108,7 @@ class MovieActivity : AppCompatActivity() {
             R.id.action_update -> {
                 if (CheckNetworkConnection.checkNetwork(this)) {
                     updatePopularMovies()
+                    sharedPreferences.edit().putBoolean("first_time_movie_data_fetch", false).apply()
                 } else {
                     Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
                         .show()

@@ -5,6 +5,6 @@
     <string name="artist">Artists</string>
     <string name="update">Update</string>
     <string name="artistPopular">Recent Popular Artists</string>
-    <string name="tvshowPopular">Recent Popular TvShows</string>
+    <string name="tvshowPopular">Recent Popular TV Shows</string>
     <string name="moviePopular">Recent Popular Movies</string>
 </resources>
