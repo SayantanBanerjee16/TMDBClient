@@ -7,14 +7,20 @@
     <application
         android:name=".presentation.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/iconmovie"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/iconmovie"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.artist.ArtistActivity" />
-        <activity android:name=".presentation.tvshow.TvShowActivity" />
-        <activity android:name=".presentation.movie.MovieActivity" />
+        <activity
+            android:name=".presentation.artist.ArtistActivity"
+            android:label="@string/artistPopular" />
+        <activity
+            android:name=".presentation.tvshow.TvShowActivity"
+            android:label="@string/tvshowPopular" />
+        <activity
+            android:name=".presentation.movie.MovieActivity"
+            android:label="@string/moviePopular" />
         <activity android:name=".presentation.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

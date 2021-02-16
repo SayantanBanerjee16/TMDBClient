@@ -16,7 +16,7 @@
             android:layout_margin="10dp"
             android:clickable="true"
             android:focusable="true"
-            app:cardBackgroundColor="@color/colorAccent"
+            app:cardBackgroundColor="@color/colorAccentOpaque"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp">
 
@@ -30,9 +30,8 @@
                     android:id="@+id/title_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:layout_gravity="center"
-                    android:text="TextView"
+                    android:layout_margin="10dp"
                     android:textColor="@android:color/background_light"
                     android:textSize="30sp"
                     android:textStyle="bold" />
@@ -41,8 +40,9 @@
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
+                    android:contentDescription="image_of_the_container"
                     android:scaleType="fitCenter"
-                    android:contentDescription="TODO"
+                    tools:ignore="HardcodedText"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
@@ -50,7 +50,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="TextView"
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
