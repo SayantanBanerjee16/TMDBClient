@@ -1,10 +1,15 @@
 # TMDB_Client_Android_Application
 ## Description
-We are bored during this long quarantine season due to the gloabal COVID-19 pandemic. Now what to do alone in our homes? Simple answer - Binge watch popular Movies and Tv Shows. But we always get overwhelmed by going through long list of Netflix/Amazon Prime Video/Disney+. Here, our application comes in handy. It will suggest you with all the popular Movies and the Tv Shows that people are bingeing in the current times. You can now easily go through the short-listed suggestions and have yourself a good time!
+
+We are bored during this long quarantine season due to the gloabal COVID-19 pandemic. Now what to do alone in our homes? Simple answer - Binge watch popular Movies and Tv Shows. But we always get overwhelmed by going through long list of Netflix/Amazon Prime Video/Disney+. Here, our application comes in handy. It will suggest you with all the popular Movies and the Tv Shows that people are bingeing in the current times. You can now easily go through the short-listed suggestions and have yourself a good time! Also it displays the list of popular celebs with their popularity index.
+
+## Application Screenshots
+
+<img src="images/home.jpg" width="200" height ="400">  <img src="images/movies.jpg" width="200" height ="400">  <img src="images/tv.jpg" width="200" height ="400">  <img src="images/artist.jpg" width="200" height ="400">
 
 ## Usage
-For installation and usage of this application
 
+For installation and usage of this application
 Navigate to: /APK/TMDBClient.apk and install it in your android phones. <Recommended Android 8.0(Oreo) version and above>
 
 ## Technologies
@@ -25,8 +30,7 @@ Navigate to: /APK/TMDBClient.apk and install it in your android phones. <Recomme
 ## Built With
 
 * Android Studio
-* Kotlin
-* TMDB API
+* [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction)
 
 ## Author
 
