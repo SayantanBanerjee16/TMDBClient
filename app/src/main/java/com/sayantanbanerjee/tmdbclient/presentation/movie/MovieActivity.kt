@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sayantanbanerjee.tmdbclient.databinding.ActivityMovieBinding
 import com.sayantanbanerjee.tmdbclient.di.Injector
+import com.sayantanbanerjee.tmdbclient.utilities.CheckNetworkConnection
 import javax.inject.Inject
 
 // Screen which displays the list of all the movies.
@@ -48,7 +49,12 @@ class MovieActivity : AppCompatActivity() {
         binding.movieRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MovieAdapter()
         binding.movieRecyclerView.adapter = adapter
-        displayPopularMovies()
+        if (CheckNetworkConnection.checkNetwork(this)) {
+            displayPopularMovies()
+        } else {
+            Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     // Call the view model which returns the movie list as a live data.
@@ -78,7 +84,12 @@ class MovieActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_update -> {
-                updatePopularMovies()
+                if (CheckNetworkConnection.checkNetwork(this)) {
+                    updatePopularMovies()
+                } else {
+                    Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                        .show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

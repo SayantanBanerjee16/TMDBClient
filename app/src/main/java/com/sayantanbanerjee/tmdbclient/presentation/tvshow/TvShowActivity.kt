@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sayantanbanerjee.tmdbclient.R
 import com.sayantanbanerjee.tmdbclient.databinding.ActivityTvShowBinding
 import com.sayantanbanerjee.tmdbclient.di.Injector
+import com.sayantanbanerjee.tmdbclient.utilities.CheckNetworkConnection
 import javax.inject.Inject
 
 // Screen which displays the list of all the TvShows.
@@ -48,7 +49,12 @@ class TvShowActivity : AppCompatActivity() {
         binding.tvshowRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = TvShowAdapter()
         binding.tvshowRecyclerView.adapter = adapter
-        displayPopularTvShows()
+        if (CheckNetworkConnection.checkNetwork(this)) {
+            displayPopularTvShows()
+        } else {
+            Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     // Call the view model which returns the TvShows list as a live data.
@@ -62,7 +68,8 @@ class TvShowActivity : AppCompatActivity() {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
             } else {
-                Toast.makeText(applicationContext, "No tv shows fetched!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "No tv shows fetched!", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }
@@ -78,7 +85,12 @@ class TvShowActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_update -> {
-                updatePopularTvShows()
+                if (CheckNetworkConnection.checkNetwork(this)) {
+                    updatePopularTvShows()
+                } else {
+                    Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                        .show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -96,7 +108,8 @@ class TvShowActivity : AppCompatActivity() {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
             } else {
-                Toast.makeText(applicationContext, "No tv shows fetched!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "No tv shows fetched!", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }

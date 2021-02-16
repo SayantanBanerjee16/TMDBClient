@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sayantanbanerjee.tmdbclient.R
 import com.sayantanbanerjee.tmdbclient.databinding.ActivityArtistBinding
 import com.sayantanbanerjee.tmdbclient.di.Injector
+import com.sayantanbanerjee.tmdbclient.utilities.CheckNetworkConnection
 import javax.inject.Inject
 
 // Screen which displays the list of all the Artist.
@@ -47,7 +48,11 @@ class ArtistActivity : AppCompatActivity() {
         binding.artistRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ArtistAdapter()
         binding.artistRecyclerView.adapter = adapter
-        displayPopularArtist()
+        if (CheckNetworkConnection.checkNetwork(this)) {
+            displayPopularArtist()
+        } else {
+            Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // Call the view model which returns the artist list as a live data.
@@ -78,7 +83,12 @@ class ArtistActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_update -> {
-                updatePopularArtist()
+                if (CheckNetworkConnection.checkNetwork(this)) {
+                    updatePopularArtist()
+                } else {
+                    Toast.makeText(this, "Network connection is not available!", Toast.LENGTH_SHORT)
+                        .show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
