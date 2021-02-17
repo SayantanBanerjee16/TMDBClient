@@ -1,7 +1,7 @@
 # TMDB_Client_Android_Application
 ## Description
 
-We are bored during this long quarantine season due to the gloabal COVID-19 pandemic. Now what to do alone in our homes? Simple answer - Binge watch popular Movies and Tv Shows. But we always get overwhelmed by going through long list of Netflix/Amazon Prime Video/Disney+. Here, our application comes in handy. It will suggest you with all the popular Movies and the Tv Shows that people are bingeing in the current times. You can now easily go through the short-listed suggestions and have yourself a good time! Also it displays the list of popular celebs with their popularity index.
+We are all bored during this long quarantined season due to the global pandemic outbreak. Now what to do alone in our homes? Simple answer - Binge watch popular Movies and Tv Shows. But we always get overwhelmed by going through the long list of Netflix/Amazon Prime Video/Disney+. Here, our Android application comes in handy. It will suggest you with all the popular Movies and Tv Shows that people are bingeing on in the current times. You can now quickly go through the short-listed suggestions and have yourself a good time! Also, it displays the list of famous celebs with their popularity index.
 
 ## Application Screenshots
 
@@ -10,7 +10,33 @@ We are bored during this long quarantine season due to the gloabal COVID-19 pand
 ## Usage
 
 For installation and usage of this application
-Navigate to: /APK/TMDBClient.apk and install it in your android phones. <Recommended Android 8.0(Oreo) version and above>
+Navigate to: [/APK/TMDBClient.apk](https://github.com/SayantanBanerjee16/TMDBClient/tree/main/APK) download and install the application into your android phones. <Recommended Android 8.0(Oreo) version and above>
+
+## Code structure
+
+<img src="images/cleancodearchitecture.png" width="300" height ="600">
+
+This application is created mainly by keeping Clean Code MVVM Architecture into our point of vision. 
+
+Why the cleaner approach?
+
+- Separation of code in different layers with assigned responsibilities making it easier for further modification.
+- High level of abstraction
+- Loose coupling between the code
+- Testing of code is painless
+
+What are the Different Layers of the Project?
+
+- **Data layer:** Would dispense the required data for the application to the domain layer by implementing interface exposed by the domain.
+  - **Remote Database:** API provides remote networking implementation. Any networking library can be integrated into Android Application using Retrofit. Defining the interfaces and setting up the RetrofitService is done in this layer.
+  - **Local Database:** The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite. Defining the Room entity, setting up the DAO Interface and building the Database Builder is done in this layer.
+
+- **Domain layer:** This will be the most generic layer of the three. It will connect the presentation layer with the data layer. This is the layer where app-related business logic will be executed. All the application use-cases and the repositories interfaces reside in the domain layer.
+  - **Use Cases:** Use cases are the application logic executor. As the name depicts each functionality can have its separate use case. With more granularity of the use case creation, it can be reused more often.
+  - **Repositories:** It specifies the functionalities required by the use cases which is implemented by the data layer. 
+
+- **Presentation layer:** The presentation layer provides the UI implementation of the application. This layer internally implements MVVM (Model-View-ViewModel) architecture.
+  - Why _MVVM Architecture_ over other patterns: MVVM architecture is a Model-View-ViewModel architecture that removes the tight coupling between each component. Most importantly, in this architecture, the children don't have the direct reference to the parent, they only have the reference by observables. Also View Model store and manage UI-related data in a lifecycle conscious way. It allows data to survive configuration changes such as screen rotations.
 
 ## Technologies
 
