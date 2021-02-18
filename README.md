@@ -12,9 +12,13 @@ We are all bored during this long quarantined season due to the global pandemic 
 For installation and usage of this application
 Navigate to: [/APK/TMDBClient.apk](https://github.com/SayantanBanerjee16/TMDBClient/tree/main/APK) download and install the application into your android phones. <Recommended Android 8.0(Oreo) version and above>
 
+## Demo Video
+
+* <a href="https://www.linkedin.com/posts/sayantan-banerjee-iiitgwalior_androiddevelopment-room-retrofit-activity-6767763474492751872-uyXu"> **Video presentation post** </a>
+
 ## Code structure
 
-<img src="images/cleancodearchitecture.png" width="300" height ="600">
+<img src="images/cleancodearchitecture.png" width="450" height ="600">
 
 This application is created mainly by keeping Clean Code MVVM Architecture into our point of vision. 
 
